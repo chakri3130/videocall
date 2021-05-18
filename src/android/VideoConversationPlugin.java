@@ -1,66 +1,51 @@
 package cordova.plugin.videocall;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import org.apache.cordova.CordovaPlugin;
+
+
+import org.apache.cordova.BuildHelper;
 import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaResourceApi;
 import org.apache.cordova.LOG;
+import org.apache.cordova.PermissionHelper;
+import org.apache.cordova.PluginResult;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-/**
- * This class echoes a string called from JavaScript.
- */
-public class videocall extends CordovaPlugin {
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+
+public class VideoConversationPlugin extends CordovaPlugin {
+
 
     public CallbackContext callbackContext;
     private CordovaInterface cordova;
     private String roomId;
     private String token;
-    private String  remoteName;
 
-
+    @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        this.cordova=cordova;
-    }
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        Context context = cordova.getActivity().getApplicationContext();
-        if(action.equals("new_activity")) {
-           // this.openNewActivity(context);
-           this.openRoom(args);
-            return true;
-        }else if (action.equals("coolMethod")) {
-            String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
-            return true;
-        }
-        return false;
+        this.cordova = cordova;
+        // your init code here
     }
 
-    private void coolMethod(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-        } else {
-            callbackContext.error("Expected one non-empty string argument.");
-        }
-    }
+    
+	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+		this.callbackContext = callbackContext;
+		if (action.equals("open")) {
+		   	this.openRoom(args);
+		}
+        return true;
+	}
 
-    private void openNewActivity(Context context) {
-        Intent intent = new Intent(context, NewActivity.class);
-        this.cordova.getActivity().startActivity(intent);
-    }
-
-    public void openRoom(final JSONArray args) {
+	public void openRoom(final JSONArray args) {
         try {
-            
             this.roomId = args.getString(0);
             this.token = args.getString(1);
-            this.remoteName = args.getString(2);
             final CordovaPlugin that = this;
             final String token = this.token;
             final String roomId = this.roomId;
@@ -72,8 +57,7 @@ public class videocall extends CordovaPlugin {
 
                     Intent intentTwilioVideo = new Intent(that.cordova.getActivity().getBaseContext(), ConversationActivity.class);
         			intentTwilioVideo.putExtra("token", token);
-                    intentTwilioVideo.putExtra("roomId", roomId);  
-                     intentTwilioVideo.putExtra("remoteName", remoteName); 
+                    intentTwilioVideo.putExtra("roomId", roomId);
                     // avoid calling other phonegap apps
                     //intentTwilioVideo.setPackage(that.cordova.getActivity().getApplicationContext().getPackageName());
                     //that.cordova.startActivityForResult(that, intentTwilioVideo);

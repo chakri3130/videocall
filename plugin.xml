@@ -1,2 +1,76 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-videocall" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"><name>videocall</name><js-module name="videocall" src="www/videocall.js"><clobbers target="cordova.plugins.videocall" /></js-module><platform name="android"><config-file parent="/*" target="res/xml/config.xml"><feature name="videocall"><param name="android-package" value="cordova-plugin-videocall.videocall" /></feature></config-file><config-file parent="/*" target="AndroidManifest.xml" /><source-file src="src/android/videocall.java" target-dir="src/cordova-plugin-videocall/videocall" /></platform><platform name="ios"><config-file parent="/*" target="config.xml"><feature name="videocall"><param name="ios-package" value="videocall" /></feature></config-file><source-file src="src/ios/videocall.m" /></platform></plugin>
+<plugin id="cordova-plugin-videocall" version="0.0.1"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>videocall</name>
+    <js-module name="videocall" src="www/videocall.js">
+        <clobbers target="cordova.plugins.videocall" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="videocall">
+                <param name="android-package" value="cordova.plugin.videocall.videocall" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+
+<uses-feature android:name="android.hardware.camera" />
+
+<uses-feature android:name="android.hardware.camera.autofocus" />
+
+<uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
+<uses-permission android:name="android.permission.CAMERA" />
+
+<uses-permission android:name="android.permission.INTERNET" />
+
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+</config-file>
+    <config-file parent="/*" target="AndroidManifest.xml" />
+<source-file src="src/android/videocall.java" target-dir="src/cordova/plugin/videocall" />
+<source-file src="src/android/NewActivity.java" target-dir="src/cordova/plugin/videocall" />
+<source-file src="src/android/activity_new.xml" target-dir="res/layout" />
+<source-file src="src/android/VideoConversationPlugin.java" target-dir="src/cordova/plugin/videocall" />
+<source-file src="src/android/ConversationActivity.java" target-dir="src/cordova/plugin/videocall" />
+<source-file src="src/android/Dialog.java" target-dir="src/cordova/plugin/videocall" />
+<source-file src="src/android/CameraCapturerCompat.java" target-dir="src/cordova/plugin/videocall" />
+<framework custom="true" src="src/android/twiliovideo.gradle" type="gradleReference" />
+<dependency id="cordova-plugin-compat" />
+<resource-file src="src/android/res/drawable/ic_call_end_white_24dp.xml" target="res/drawable/ic_call_end_white_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_call_end_white_24px.xml" target="res/drawable/ic_call_end_white_24px.xml" />
+<resource-file src="src/android/res/drawable/ic_launcher_background.xml" target="res/drawable/ic_launcher_background.xml" />
+<resource-file src="src/android/res/drawable/ic_mic_off_black_24dp.xml" target="res/drawable/ic_mic_off_black_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_mic_white_24dp.xml" target="res/drawable/ic_mic_white_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_phonelink_ring_white_24dp.xml" target="res/drawable/ic_phonelink_ring_white_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_switch_camera_white_24dp.xml" target="res/drawable/ic_switch_camera_white_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_video_call_black_24dp.xml" target="res/drawable/ic_video_call_black_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_video_call_white_24dp.xml" target="res/drawable/ic_video_call_white_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_videocam_off_black_24dp.xml" target="res/drawable/ic_videocam_off_black_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_videocam_white_24dp.xml" target="res/drawable/ic_videocam_white_24dp.xml" />
+<resource-file src="src/android/res/drawable/ic_volume_up_white_24dp.xml" target="res/drawable/ic_volume_up_white_24dp.xml" />
+<resource-file src="src/android/res/drawable/rounded_rectangle.xml" target="res/drawable/rounded_rectangle.xml" />
+<resource-file src="src/android/res/layout/activity_video.xml" target="res/layout/activity_video.xml" />
+<resource-file src="src/android/res/layout/content_video.xml" target="res/layout/content_video.xml" />
+<resource-file src="src/android/res/values/colors.xml" target="res/values/colors.xml" />
+<resource-file src="src/android/res/values/dimens.xml" target="res/values/dimens.xml" />
+<resource-file src="src/android/res/values/strings.xml" target="res/values/strings.xml" />
+<resource-file src="src/android/res/values/styles.xml" target="res/values/styles.xml" />
+<resource-file src="src/android/res/values-v21/styles.xml" target="res/values-v21/styles.xml" />
+<resource-file src="src/android/res/values-w820dp/dimens.xml" target="res/values-w820dp/dimens.xml" />   
+    </platform>
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="videocall">
+                <param name="ios-package" value="videocall" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/videocall.m" />
+    </platform>
+</plugin>
