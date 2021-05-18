@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-videocall",
+  "version": "0.0.1",
+  "description": "to make video call to participents",
+  "cordova": {
+    "id": "cordova-plugin-videocall",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chakri3130/videocall.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "medleymed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chakri3130/videocall/issues"
+  },
+  "homepage": "https://github.com/chakri3130/videocall#readme"
+}
