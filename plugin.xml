@@ -81,7 +81,7 @@ github path the specs for the needed Twilio v1 SDK is located -->
 <source url="https://github.com/CocoaPods/Specs"/>
 <source url="https://github.com/CocoaPods/Specs/tree/master/Specs/1/d/9/TwilioVideo/"/>
 </pods-config>
-<pod name="TwilioVideo" version="3.2" />
+<pod name="TwilioVideo" version="4.4" />
 <preference name="CAMERA_USAGE_DESCRIPTION" default="Camera" />
 <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
 <string>$CAMERA_USAGE_DESCRIPTION</string>
