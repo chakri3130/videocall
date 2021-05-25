@@ -1,28 +1,49 @@
-/********* videocall.m Cordova Plugin Implementation *******/
-
 #import <Cordova/CDV.h>
-
-@interface videocall : CDVPlugin {
+#import "TwilioVideoViewController.h"
+@interface videocall : CDVPlugin <TwilioVideoCalldelegate> {
   // Member variables go here.
 }
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command;
+- (void)new_activity:(CDVInvokedUrlCommand*)command;
 @end
 
 @implementation videocall
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command
+- (void)new_activity:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
-
-    if (echo != nil && [echo length] > 0) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    }
-
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    NSString* room = command.arguments[0];
+    NSString* token = command.arguments[1];
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"TwilioVideo" bundle:nil];
+        TwilioVideoViewController *vc = [sb instantiateViewControllerWithIdentifier:@"TwilioVideoViewController"];
+        vc.delegate_call = self;
+        vc.accessToken = token;
+        // UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        //  [vc.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissTwilioVideoController)]];
+        
+        
+        [self.viewController presentViewController:vc animated:YES completion:^{
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"ok"];
+            [vc connectToRoom:room];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        }];
+    });
 }
+- (void) dismissTwilioVideoController {
+    [self.viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)didEndcall{            
+     NSDictionary * payload = @{
+           @"data":@"EndCall",
+       };
+       
+       [[NSNotificationCenter defaultCenter] postNotificationName:@"aftercallends"
+                                                           object:nil
+                                                         userInfo:payload];
+}
+
 
 @end
