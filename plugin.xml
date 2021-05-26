@@ -66,6 +66,15 @@
 <resource-file src="src/android/res/values-w820dp/dimens.xml" target="res/values-w820dp/dimens.xml" />   
     </platform>
     <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+
+<feature name="videocall">
+
+<param name="ios-package" value="videocall" />
+
+</feature>
+
+</config-file>
         <source-file src="src/ios/videocall.m" />
 <source-file src="src/ios/TwilioVideoViewController.m" />
 <header-file src="src/ios/TwilioVideoViewController.h" />
